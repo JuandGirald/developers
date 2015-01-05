@@ -42,3 +42,5 @@ gem 'spring',        group: :development
 gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'geocoder'
+
+gem 'httparty'

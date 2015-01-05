@@ -15,45 +15,31 @@
 <%= yield %>
 
 <script>
-  function createSidebarLi(json){
-    return ("<li><a>" + json.name + "</a></li>");
-  };
+  function gmap_show(developer) {
+    // if ((developer.latitude == null) || (developer.longitude == null) ) {    // validation check if coordinates are there
+    //   return 0;
+    // }
 
-  function bindLiToMarker($li, marker){
-    $li.on('click', function(){
-      handler.getMap().setZoom(14);
-      marker.setMap(handler.getMap()); //because clusterer removes map property from marker
-      marker.panTo();
-      google.maps.event.trigger(marker.getServiceObject(), 'click');
-    })
-  };
+    handler = Gmaps.build('Google');    // map init
+    handler.buildMap({ provider: {}, internal: {id: 'multi_markers'}}, function(){
+      var json_array = []
+      for (i = 0, len = developer.length; i < 1000; ++i) {
+        
+        json_array.push(    // put marker method
+          {
+            "lat": developer[i].latitude,    // coordinates from parameter developer
+            "lng": developer[i].longitude,
+            "infowindow": "<b>" + developer[i].name + "</b> , " + developer[i].location
+          }
+        );
+      }
+      var markers = handler.addMarkers(json_array);
 
-  function createSidebar(json_array){
-    _.each(json_array, function(json){
-      var $li = $( createSidebarLi(json) );
-      $li.appendTo('#sidebar_container');
-      bindLiToMarker($li, json.marker);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(2);    // set the default zoom of the map
     });
-  };
-
-  handler = Gmaps.build('Google');
-  handler.buildMap({ internal: {id: 'sidebar_builder'}}, function(){
-    var json_array = [
-      { lat: 40, lng: -80, name: 'Foo', infowindow: "I'm Foo" },
-      { lat: 45, lng: -90, name: 'Bar', infowindow: "I'm Bar" },
-      { lat: 50, lng: -85, name: 'Baz', infowindow: "I'm Baz" }
-    ];
-
-    var markers = handler.addMarkers(json_array);
-
-    _.each(json_array, function(json, index){
-      json.marker = markers[index];
-    });
-
-    // createSidebar(json_array);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-  });
+  }
 </script>
 </body>
 </html>

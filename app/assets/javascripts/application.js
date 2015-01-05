@@ -16,8 +16,7 @@
 //= require underscore
 //= require gmaps/google
 //= require_tree .
-
-
+  
 function createSidebarLi(json){
   return ("<li><a>" + json.name + "</a></li>");
 };
@@ -39,22 +38,27 @@ function createSidebar(json_array){
   });
 };
 
-handler = Gmaps.build('Google');
-handler.buildMap({ internal: {id: 'sidebar_builder'}}, function(){
-  var json_array = [
-    { lat: 40, lng: -80, name: 'Foo', infowindow: "I'm Foo" },
-    { lat: 45, lng: -90, name: 'Bar', infowindow: "I'm Bar" },
-    { lat: 50, lng: -85, name: 'Baz', infowindow: "I'm Baz" }
-  ];
+function gmap_show(developer) {
+  if ((developer.lat == null) || (developer.lng == null) ) {    // validation check if coordinates are there
+    return 0;
+  }
 
-  var markers = handler.addMarkers(json_array);
-
-  _.each(json_array, function(json, index){
-    json.marker = markers[index];
+  handler = Gmaps.build('Google');    // map init
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([    // put marker method
+      {
+        "lat": developer.lat,    // coordinates from parameter developer
+        "lng": developer.lng,
+        "picture": {    // setup marker icon
+          "url": 'http://www.planet-action.org/img/2009/interieur/icons/orange-dot.png',
+          "width":  32,
+          "height": 32
+        },
+        "infowindow": "<b>" + developer.name
+      }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(12);    // set the default zoom of the map
   });
-
-  createSidebar(json_array);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
-});
-   
+}
