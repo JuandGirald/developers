@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  name: MyString
+  age: 1
+  location: MyString
+  accept_rate: 1
+  website_url: MyString
+  link: MyString
+  reputation: 1
+  reputation_change_year: 1
+  reputation_change_quarter: 1
+  reputation_change_month: 1
+  reputation_change_week: 1
+  bronze_badges: 1
+  silver_badges: 1
+  gold_badges: 1
+
+two:
+  user_id: 1
+  name: MyString
+  age: 1
+  location: MyString
+  accept_rate: 1
+  website_url: MyString
+  link: MyString
+  reputation: 1
+  reputation_change_year: 1
+  reputation_change_quarter: 1
+  reputation_change_month: 1
+  reputation_change_week: 1
+  bronze_badges: 1
+  silver_badges: 1
+  gold_badges: 1

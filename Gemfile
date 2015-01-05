@@ -38,3 +38,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+#Google maps for rails
+gem 'gmaps4rails'
+gem 'underscore-rails'
+gem 'geocoder'
