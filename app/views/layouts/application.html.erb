@@ -3,49 +3,27 @@
 <head>
   <title>Develpers</title>
 
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-  <script type="text/javascript" src="https://www.heatmaptool.com/js/heatmap.js"></script>
   
-
+  <style>
+    html { height: 100% }
+    body { height: 100%; margin: 0; padding: 0 }
+    #map-canvas { height: 100% }
+    h1 { position:absolute; }
+  </style>
+  
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src="assets/heatmap.js"></script>
+  <script src="assets/gmaps-heatmap.js"></script>    
+  
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-  
-<body onload="initialize();">
-  
+<body>
+
 <%= yield %>
 
 <script>
-
-  function initialize() {
-
-      // Creates and inserts Google Map
-
-      var mapOptions = {
-        zoom: 4,
-        center: new google.maps.LatLng(38, -97),
-        mapTypeId: google.maps.MapTypeId.SATELLITE
-      };
-
-      var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-
-      // Constructs a heat map overlay
-
-      var heatMap = new HeatMap({
-        key: '04c8bbbc43413beaf5e3480e0d6ff7d6',
-        data: 'https://www.heatmaptool.com/data/mcdonalds.csv',
-        gradient: 'fire',
-        scale_dimming: 0.5,
-        radius: 5
-      });
-
-      // Adds heat map to Google Map
-
-      heatMap.addTo(map);
-
-    }
-
   // function gmap_show(developer) {
   //   // if ((developer.latitude == null) || (developer.longitude == null) ) {    // validation check if coordinates are there
   //   //   return 0;
@@ -54,7 +32,7 @@
   //   handler = Gmaps.build('Google');    // map init
   //   handler.buildMap({ provider: {}, internal: {id: 'multi_markers'}}, function(){
   //     var json_array = []
-  //     for (i = 0, len = developer.length; i < 3000; ++i) {
+  //     for (i = 0, len = developer.length; i < 1000; ++i) {
         
   //       json_array.push(    // put marker method
   //         {
@@ -71,6 +49,58 @@
   //     handler.getMap().setZoom(2);    // set the default zoom of the map
   //   });
   // }
+   // map center
+
+  function gmap_show(developer) {
+    var myLatlng = new google.maps.LatLng(25.6586, -80.3568);
+    // map options,
+    var myOptions = {
+      zoom: 3,
+      center: myLatlng
+    };
+    // standard map
+    map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+    // heatmap layer
+    heatmap = new HeatmapOverlay(map, 
+      {
+        // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+        "radius": 2,
+        "maxOpacity": 1, 
+        // scales the radius based on map zoom
+        "scaleRadius": true, 
+        // if set to false the heatmap uses the global maximum for colorization
+        // if activated: uses the data maximum within the current map boundaries 
+        //   (there will always be a red spot with useLocalExtremas true)
+        "useLocalExtrema": true,
+        // which field name in your data represents the latitude - default "lat"
+        latField: 'lat',
+        // which field name in your data represents the longitude - default "lng"
+        lngField: 'lng',
+        // which field name in your data represents the data value - default "value"
+        valueField: 'count'
+      }
+    );
+    
+    var testData = {
+      max: 8,
+      data: [{ 
+        lat: 0,    // coordinates from parameter developer
+        lng: 0,
+        count: 1
+      }]
+    };
+
+    for (i = 0, len = developer.length; i < 1000; ++i) {
+        
+      testData['data'].push(    // put marker method
+        {
+          lat: developer[i].latitude,    // coordinates from parameter developer
+          lng: developer[i].longitude,
+          count: 1
+        }
+      );
+    }
+    heatmap.setData(testData);
+  }
 </script>
 </body>
-</html>

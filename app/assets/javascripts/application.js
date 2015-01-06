@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require underscore
 //= require gmaps/google
+//= require heatmap
+//= require gmaps-heatmap
 //= require_tree .
   
 function createSidebarLi(json){
@@ -38,27 +40,3 @@ function createSidebar(json_array){
   });
 };
 
-function gmap_show(developer) {
-  if ((developer.lat == null) || (developer.lng == null) ) {    // validation check if coordinates are there
-    return 0;
-  }
-
-  handler = Gmaps.build('Google');    // map init
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers([    // put marker method
-      {
-        "lat": developer.lat,    // coordinates from parameter developer
-        "lng": developer.lng,
-        "picture": {    // setup marker icon
-          "url": 'http://www.planet-action.org/img/2009/interieur/icons/orange-dot.png',
-          "width":  32,
-          "height": 32
-        },
-        "infowindow": "<b>" + developer.name
-      }
-    ]);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-    handler.getMap().setZoom(12);    // set the default zoom of the map
-  });
-}

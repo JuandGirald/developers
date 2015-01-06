@@ -1,2 +1,9 @@
 <h1>StaticPages</h1>
-<div id="map_canvas" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;"></div>
+<div id="map-canvas"></div>
+
+<%= javascript_tag do %>
+  $(document).ready(function(){
+    var developer = <%=raw @developer.to_json %>    // pass ruby variable to javascript
+    gmap_show(developer);    // init show map for company card (only print marker)
+  });
+<% end %>
