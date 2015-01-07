@@ -7,7 +7,7 @@
   <style>
     html { height: 100% }
     body { height: 100%; margin: 0; padding: 0 }
-    #map-canvas { height: 100% }
+    #map-canvas { height: 100%;}
     h1 { position:absolute; }
   </style>
   
@@ -52,10 +52,10 @@
    // map center
 
   function gmap_show(developer) {
-    var myLatlng = new google.maps.LatLng(25.6586, -80.3568);
+    var myLatlng = new google.maps.LatLng(25.6586, -30.3568);
     // map options,
     var myOptions = {
-      zoom: 3,
+      zoom: 2,
       center: myLatlng
     };
     // standard map
@@ -90,7 +90,7 @@
       }]
     };
 
-    for (i = 0, len = developer.length; i < 4000; ++i) {
+    for (i = 0, len = developer.length; i < len; ++i) {
         
       testData['data'].push(    // put marker method
         {

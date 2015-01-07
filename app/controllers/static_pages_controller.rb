@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-    @developer = Developer.all
+    @developer = Developer.where.not(latitude:nil)
     # @hash = Gmaps4rails.build_markers(@developers) do |developer, marker|
     #   marker.lat developer.latitude
     #   marker.lng developer.longitude
