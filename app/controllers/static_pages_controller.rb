@@ -1,10 +1,14 @@
 class StaticPagesController < ApplicationController
   def home
-    @developer = Developer.where.not(latitude:nil)
+    @developer = Developer.where.not(latitude:nil, longitude:0)
     # @hash = Gmaps4rails.build_markers(@developers) do |developer, marker|
     #   marker.lat developer.latitude
     #   marker.lng developer.longitude
     # end
+  end
+
+  def v2
+    @developer = Developer.where.not(latitude:nil, longitude:0)
   end
 
   def stack_overflow_users

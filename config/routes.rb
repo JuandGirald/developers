@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   get 'static_pages/stack_overflow_users'
 
+  match '/v2',  to: 'static_pages#v2',  via: 'get'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
