@@ -26,7 +26,7 @@ class StackOverflowSearch
     developers
   end
 
-  def self.stack_overflow_users
+  def stack_overflow_users
     page = 1
     begin
       a = get_users(page, page)
@@ -44,5 +44,4 @@ class StackOverflowSearch
 
     end while page <= 100
   end
-end
 end
