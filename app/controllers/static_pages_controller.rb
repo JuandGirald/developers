@@ -21,7 +21,8 @@ class StaticPagesController < ApplicationController
                          accept_rate: user[:accept_rate], website_url:  user[:website_url], link: user[:link], reputation: user[:reputation],
                          reputation_change_year: user[:reputation_change_year], reputation_change_quarter: user[:reputation_change_quarter], 
                          reputation_change_month: user[:reputation_change_month], reputation_change_week: user[:reputation_change_week], 
-                         bronze_badges: user[:bronze_badges], silver_badges: user[:silver_badges], gold_badges: user[:gold_badges])
+                         bronze_badges: user[:bronze_badges], silver_badges: user[:silver_badges], gold_badges: user[:gold_badges],
+                         profile_image: user[:profile_image])
       end
 
       page +=1

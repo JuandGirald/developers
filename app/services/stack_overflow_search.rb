@@ -19,7 +19,8 @@ class StackOverflowSearch
         reputation_change_week:    user['reputation_change_week'],
         bronze_badges: user['badge_counts']['bronze'],
         silver_badges: user['badge_counts']['silver'], 
-        gold_badges:   user['badge_counts']['gold']
+        gold_badges:   user['badge_counts']['gold'],
+        profile_image:   user['profile_image']
       }
     end
     developers
