@@ -26,7 +26,7 @@ class StackOverflowSearch
     developers
   end
 
-  def stack_overflow_users
+  def self.stack_overflow_users
     page = 1
     begin
       a = get_users(page, page)
