@@ -22,6 +22,7 @@
 </head>
 <body>
 
+
 <%= yield %>
 
 <script>
@@ -39,7 +40,7 @@
           {
             "lat": developer[i].latitude,    // coordinates from parameter developer
             "lng": developer[i].longitude,
-            "infowindow": "<div style='text-align: center;'> <img src='" + developer[i].profile_image + "' width='90px' height='90px'></div> <b>" + developer[i].name + "</b> , " + developer[i].location
+            "infowindow": "<div style='text-align: center;'> <img src='" + developer[i].profile_image + "' width='90px' height='90px'></div> <a target='_blank' href='" + developer[i].link + "'>" + developer[i].name + "</a> , " + developer[i].location
           }
         );
       }
